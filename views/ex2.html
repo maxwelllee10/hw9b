@@ -1,0 +1,31 @@
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Travel Information</title>
+</head>
+<body>
+  <h1>Travel Information</h1>
+  <button id="submitBtn">Submit</button>
+  <div id="result"></div>
+  <script>
+    const submitBtn = document.getElementById('submitBtn');
+    const resultDiv = document.getElementById('result');
+    
+    submitBtn.addEventListener('click', () => {
+      const name = 'Maxwell Lee'; 
+      const countries = ['Mexico', 'China', 'United States']; 
+      
+      fetch('/api/countries', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ name, countries })
+      })
+      .then(response => response.text())
+      .then(message => resultDiv.textContent = message)
+      .catch(error => console.error(error));
+    });
+  </script>
+</body>
+</html>
